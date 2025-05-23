@@ -1,0 +1,10 @@
+#include <stdio.h>
+
+int main (){
+    int mynum = 15;
+    printf("My number is ");
+    printf("%d", mynum);
+    
+    return 0;
+    
+}
