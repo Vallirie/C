@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node{
+	int data;
+	struct Node* next;
+}Node;
+
+	Node* head;
+	void insert(int x);
+	void print();
+
+int main(){
+	int n, x;
+	printf("Enter a number you can input: ");
+	scanf("%d", &n);
+	
+	for(int i = 0; i < n; i++){
+		printf("Enter a number for %d:", i+1);
+		scanf("%d", &x);
+		printf("The list is");
+		insert(x);
+		print();
+		printf("\n");
+	}	
+	printf("NULL");
+	
+	return 0;
+}
+
+	void insert(int x){
+		Node* temp = (Node*) malloc(sizeof(Node));
+		temp ->data = x;
+		temp -> next = head;
+		head = temp;
+	}	
+	void print(){
+	Node* temp = head;
+			while(temp != NULL){
+				printf(" %d", temp ->data);
+				temp = temp ->next;
+			}
+	}
+	
+	
