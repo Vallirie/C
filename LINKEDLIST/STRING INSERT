@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string>
+
+typedef struct Node{
+    char name[100];
+    struct Node* next;
+
+}Node;
+
+Node* head = NULL;
+void insert(const char* name1);
+void prent();
+
+int main(){
+
+    char name1[100];
+    char tryagain[2];
+    do{
+    printf("Enter a name: ");
+    scanf("%99s", &name1);
+    insert(name1);
+    prent();
+    
+    printf("\nDo you want to continue again?: ");
+    scanf("%1s", tryagain);
+    }while (strcmp(tryagain, "Y") ==0 || strcmp(tryagain, "y")==0);
+    
+    return 0;
+}
+
+void insert(const char* name1){
+    Node* first = (Node*)malloc(sizeof(Node));
+    strcpy(first -> name, name1);
+    first -> next = head;
+    head = first;
+}
+void prent(){
+    printf("List of the name \n");
+    Node* temp = head;
+    while (temp != NULL){
+    printf("%s\n", temp -> name);
+    temp = temp -> next;
+    }
+
+}
