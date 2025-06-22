@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node{
+    int data;
+    struct Node* next;
+}Node;
+
+
+int main(){
+    Node* first = (Node*)malloc(sizeof(Node));
+    Node* second = (Node*)malloc(sizeof(Node));
+    Node* third = (Node*)malloc(sizeof(Node));
+    
+    first -> data = 40;
+    first -> next = second;
+    
+    second -> data = 50;
+    second -> next = third;
+    
+    third -> data = 80;
+    third -> next = NULL;
+    
+    Node* temp = first;
+    while (temp != NULL){
+        printf("%d -> ", temp -> data);
+        temp = temp -> next;
+    }
+    printf("NULL");
+    
+ return 0;   
+    
+}
+    
+    
