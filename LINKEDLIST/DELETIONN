@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node{
+    int data;
+    struct Node* next;
+}Node;
+
+Node* head = NULL;
+void insert(int data, int n);
+void print();
+void dele(int num);
+
+int main(){
+    int data;
+    int choice;
+    insert(31, 1);
+    insert(35, 2);
+    insert(32, 1);
+    insert(21, 4);
+    insert(25, 5);
+    do{
+    print();
+    
+    printf("Enter a number that you will delete: ");
+    scanf("%d", &data);
+    dele(data);
+    } while (choice != 0);
+    
+}
+
+void insert(int data, int n){
+    Node* temp1 = (Node*)malloc(sizeof(Node));
+    temp1 -> data = data;
+    temp1 -> next = NULL;
+        if (n == 1){
+        temp1 -> next = head;
+        head = temp1;
+        return;
+     }
+     Node* temp2 = head;
+     for (int i = 0; i < n - 2; i++){
+         temp2 = temp2 -> next;
+     }
+     temp1 -> next = temp2 -> next;
+     temp2 -> next = temp1;
+}
+
+void print(){
+    Node* temp = head;
+    while (temp != NULL){
+        printf("%d ", temp -> data);
+        temp = temp -> next;
+    }
+    printf("\n");
+}
+
+void dele(int num){
+    Node* temp = head;
+    Node* back = NULL;
+    
+    if(temp != NULL && temp -> data == num){
+        head = temp ->next;
+        free(temp);
+        printf("The %d value has been deleted!!\n", num);
+        return;
+    }
+    
+    while (temp != NULL && temp -> data != num){
+        back = temp;
+        temp = temp -> next;
+    }
+    
+        if(temp == NULL){
+            printf("The value %d has not been found\n", num);
+            return;
+        }
+        back -> next = temp -> next;
+        free(temp);
+        printf("The value %d has been deleted\n", num);
+        return;
+}
