@@ -1,0 +1,104 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node{
+    int data;
+    struct Node* next;
+}Node;
+
+Node* head = NULL;
+void hehe();
+void insert(int number);
+void display();
+void dele (int num);
+
+int main(){
+    int num;
+    int choice;
+    int n;
+    
+    do{
+        hehe();
+        printf("\nChoose an option: ");
+        scanf("%d", &choice);
+        
+        if(choice == 1){
+            printf("Insert a number: ");
+            scanf("%d", &num);
+            insert(num);
+            printf("The number has been added completely!!\n");
+        }
+        else if (choice == 2){
+            display();
+        }
+        else if (choice == 3){
+            printf("Choose a number that you wanted to remove: ");
+            scanf("%d", &num);
+            dele(num);
+        }
+        else if (choice == 4){
+            printf("\nThank you for using our system!!")
+            return 0;
+        }
+        
+        
+    }
+    while (choice != 0);
+  
+} 
+
+void insert (int num){
+    Node* temp1 = (Node*)malloc(sizeof(Node));
+    temp1 -> data = num;
+    temp1 -> next = head; 
+    head = temp1;
+}
+
+void display(){
+    Node* temp = head;
+    while (temp != NULL){
+        printf("%d ", temp -> data);
+        temp = temp -> next;
+    }
+    printf("\n");
+    
+    
+}
+
+void dele(int num){
+    Node* temp = head;
+    Node* back = NULL;
+    
+    if(temp != NULL && temp -> data == num){
+        head = temp -> next;
+        free(temp);
+        printf("Deleted %d from the list.\n", num);
+        return;
+    }
+    
+    while (temp != NULL && temp-> data != num){
+        back = temp;
+        temp = temp -> next;
+    }
+    if(temp == NULL){
+        printf("The value %d was not found\n", num);
+        return;
+    }
+
+    back->next = temp->next;
+    free(temp);
+    printf("Deleted %d from the list.\n", num);
+    
+}
+
+void hehe(){
+    printf("------------------------");
+    printf("\n- 1. Insert a number   -");
+    printf("\n- 2. Display a number  -");
+    printf("\n- 3. Delete a number   -");
+    printf("\n- 4. Exit              -");
+    printf("\n------------------------");
+
+}
+    
+    
