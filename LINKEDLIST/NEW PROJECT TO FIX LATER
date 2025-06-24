@@ -1,0 +1,97 @@
+#include <stdio.h>
+#include<stdlib.h>
+
+typedef struct Node{
+    int data;
+    struct Node* next;
+}Node;
+
+Node* head = NULL;
+void option();
+void insert(int id);
+void display();
+void dele(int num);
+
+int main (){
+    int opt;
+    int choice, id;
+    do{
+        option();
+        printf("Enter an option: ");
+        scanf("%d", &choice);
+        
+        if (choice == 1){
+            printf("Type another ID number: ");
+            scanf("%d", &id);
+            insert(id);
+            printf("The student ID has been added!!\n");
+        }
+        else if(choice == 2){
+            display();
+        }
+        else if(choice == 3){
+            printf("What ID number that you wanted to delete: ");
+            scanf("%d", &id);
+            dele(id);
+        }
+        else if(choice == 4){
+            printf("Thank for using our system!!");
+            return 0;
+        }
+    }while (opt != 0);
+    
+}
+
+void option(){
+    printf("-------------------------------\n");
+    printf("- 1. Insert an ID number      -\n");
+    printf("- 2. Displaying all ID number -\n");
+    printf("- 3. Delete ID number         -\n");
+    printf("- 4. Exit                     -\n");
+    printf("-------------------------------\n");
+}
+
+void insert(int id){
+    Node* student = (Node*)malloc(sizeof(Node));
+    student -> data = id;
+    student -> next = head;
+    head = student;
+    return;
+}
+
+void display(){
+    Node* temp = head;
+    int i = 1;
+    printf("\nLIST OF THE STUDENT ID NUMBER!!\n");
+    while(temp!= NULL){
+        printf("Student ID no. %d: %d\n", i, temp -> data);
+        temp = temp -> next;
+        i++;
+    }
+    printf("\n");
+}
+
+void dele(int num){
+    Node* temp = head;
+    Node* back = NULL;
+    
+    if(temp != NULL && temp -> data == num){
+        head = temp -> next;
+        free(temp);
+        printf("The school ID %d has been deleted!!\n", num);
+        return;
+    }
+    while (temp != NULL && temp -> data != num){
+        back = temp;
+        temp = temp -> next;
+    }
+        if(temp == NULL){
+            printf("The school ID %d was not found!!\n", num);
+            return;
+        }
+    
+        back -> next = temp -> next;
+        free(temp); 
+        printf("The school ID %d has been deleted!!\n", num);
+        return;
+}
