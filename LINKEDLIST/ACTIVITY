@@ -1,0 +1,154 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct Node{
+    char book[100];
+    char name[100];
+    int year;
+    int number;
+    char company[100];
+    char address[100];
+    char status[100];
+    struct Node* next;
+}Node;
+
+typedef struct book{
+    char book[100];
+    char author[100];
+    int year, num;
+    char address[100];
+    char company[100];
+    char status[100];
+}book;
+
+void dele(const char* book);
+Node* head = NULL;
+void choices(); 
+void insert(const char* book, const char* author, int year, int num, const char* company, const char* address, const char* status);
+void reverse();
+
+int main(){
+    int choice;
+    book s1;
+    
+    do{
+        choices();
+        printf("Enter a choice: ");
+        scanf("%d", &choice);
+         getchar();
+        
+        if(choice == 1){
+            printf("A. Enter a book name: ");
+            fgets(s1.book, sizeof(s1.book),stdin);
+			s1.book[strcspn(s1.book, "\n")] = '\0';
+            printf("B. Enter the Authors name: ");
+            fgets(s1.author, sizeof(s1.author),stdin);
+			s1.author[strcspn(s1.author, "\n")] = '\0';
+			printf("C. Enter a  publishing Company: ");
+            fgets(s1.company, sizeof(s1.company),stdin);
+			s1.company[strcspn(s1.company, "\n")] = '\0';
+            printf("D. Renters name address: ");
+            fgets(s1.address, sizeof(s1.address),stdin);
+			s1.address[strcspn(s1.address, "\n")] = '\0';
+            printf("E. Enter a published year: ");
+            scanf("%d", &s1.year);
+            printf("F. Enter an address Number: ");
+            scanf("%d", &s1.num);
+            printf("G. Status: ");
+            scanf("%99s", &s1.status);
+            insert(s1.book, s1.author, s1.year, s1.num, s1.company, s1.address, s1.status);
+        }
+        else if(choice == 2){
+            reverse();
+        }
+        else if(choice == 3){
+            printf("Enter a name that you wanted to delete: ");
+            scanf(" %[^\n]s", &s1.book);
+            dele(s1.book);
+        }
+        else if (choice == 4){
+            return 0;
+        }
+    }while(1);
+    
+}
+
+void choices(){
+    printf("WELCOME  TO RENTAL SHOP!!\n");
+    printf("-----------------------------------\n");
+    printf("- 1. Add a book                   -\n");
+    printf("- 2. Display                      -\n");
+    printf("- 3. Delete a book                -\n");
+    printf("- 3. Exit                         -\n");
+    printf("-----------------------------------\n");
+}
+
+void insert(const char* book, const char* author, int year, int num, const char* company, const char* address, const char* status){
+    
+    Node* temp1 = (Node*)malloc(sizeof(Node));
+    strcpy(temp1 -> book, book);
+    strcpy(temp1 -> name, author);
+    temp1 -> year = year;
+    temp1 -> number = num;
+    strcpy(temp1 -> company, company);
+    strcpy(temp1 -> address, address);
+    strcpy(temp1 -> status, status);
+    temp1 -> next = head;
+    head = temp1;
+}
+
+void reverse(){
+    Node *prev, *next, *current;
+    current = head;
+    prev = NULL;
+    
+    while(current != NULL){
+        next = current -> next;
+        current -> next = prev;
+        prev = current;
+        current = next;
+    }
+    head = prev;
+    
+    printf("\nDisplay Book status!!\n");
+    Node* temp = head;
+    while (temp != NULL){
+        printf("Book Name: %s\n", temp -> book);
+        printf("Authors Name: %s\n", temp -> name);
+        printf("Published year: %d\n", temp -> year);
+        printf("Address Number: %d \n", temp -> number);
+        printf("Publishing Company: %s \n", temp -> company);
+        printf("Renters Address: %s \n", temp -> address);
+        printf("Status: %s \n", temp -> status);
+        temp = temp -> next;
+    }
+    printf("\n");
+    return;
+}
+
+void dele(const char* book){
+    Node* temp = head;
+    Node* back = NULL;
+    
+        if (temp != NULL &&  strcmp(temp->book, book) == 0){
+            head = temp -> next;
+            free(temp);
+            printf("The book titled %s has been deleted on the list\n!!", book);
+            return;
+        }
+        
+        while(temp!= NULL &&   strcmp(temp->book, book) != 0){
+            back = temp;
+            temp = temp -> next;
+        }
+            if(temp == NULL){
+                printf("The book titled %s has not yet found!!\n", book);
+                return;
+            }
+        back -> next = temp -> next;
+        free(temp);
+        printf("The book titled %s has been deleted on the list!!\n", book);
+        return;
+}
+
