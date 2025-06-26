@@ -1,0 +1,120 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct Node{
+    char name[100];
+    int data;
+    struct Node* next;
+}Node;
+
+Node* head = NULL;
+void choices();
+void insert(const char* name1, int id);
+void reverse();
+void dele(const char* name1);
+
+
+int main(){
+    int opt;
+    int choice;
+    char name[100];
+    int id;
+    
+    do{
+    choices();
+    printf("Choose an option: ");
+    scanf("%d", &choice);
+    getchar();
+    
+        if(choice == 1){
+            printf("Enter a student name: ");
+            fgets(name, sizeof(name),stdin);
+			name[strcspn(name, "\n")] = '\0';
+			printf("Enter a student ID: ");
+			scanf("%d", &id);
+            insert(name, id);
+            printf("The data has been added!!\n");
+        }
+        else if(choice == 2){
+            reverse();
+        }
+        else if(choice == 3){
+            printf("Enter a student name that you wanted to delete: ");
+            fgets(name, sizeof(name),stdin);
+			name[strcspn(name, "\n")] = '\0';
+            dele(name);
+        }
+        else if(choice == 4){
+            printf("Thank you for using our system!!");
+            break;
+        }
+        
+    }while(1);
+    
+}
+
+void choices(){
+    printf("----------------------------------\n");
+    printf("- 1. Enter a Student Information -\n");
+    printf("- 2. Displaying the student      -\n");
+    printf("- 3. Delete                      -\n");
+    printf("- 4. Exit                        -\n");
+    printf("----------------------------------\n");
+}
+
+void insert(const char* name1, int id){
+    Node* temp1 = (Node*)malloc(sizeof(Node));
+    strcpy(temp1 -> name, name1);
+    temp1 -> data = id;
+    temp1 -> next = head;
+    head = temp1;
+    return;
+}
+
+void reverse(){
+    Node *current, *next, *prev;
+    current = head;
+    prev = NULL;
+        while(current != NULL){
+            next = current -> next;
+            current -> next = prev;
+            prev = current;
+            current = next;
+        }
+        head = prev;
+    
+    Node* temp = head;
+        printf("\nLIST OF THE STUDENT INFORMATION!!\n");
+        while(temp != NULL){
+            printf("Student Name: %s    || Student ID: %d\n", temp -> name, temp -> data);
+            temp = temp -> next;
+        }
+        printf("\n");
+}
+
+void dele(const char* name1){
+    Node* temp = head;
+    Node* back = NULL;
+    
+        if (temp != NULL &&  strcmp(temp->name, name1) == 0){
+            head = temp -> next;
+            free(temp);
+            printf("The name %s has been deleted on the list\n!!", name1);
+            return;
+        }
+        
+        while(temp!= NULL &&  strcmp(temp->name, name1) != 0){
+            back = temp;
+            temp = temp -> next;
+        }
+            if(temp == NULL){
+                printf("The name %s has not yet found!!\n", name1);
+                return;
+            }
+        back -> next = temp -> next;
+        free(temp);
+        printf("The name %s has been deleted on the list!!\n", name1);
+        return;
+}
+
