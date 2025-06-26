@@ -68,6 +68,7 @@ int main(){
             dele(s1.book);
         }
         else if (choice == 4){
+        	printf("Thank you for visiting our website!!");
             return 0;
         }
     }while(1);
@@ -80,7 +81,7 @@ void choices(){
     printf("- 1. Add a book                   -\n");
     printf("- 2. Display                      -\n");
     printf("- 3. Delete a book                -\n");
-    printf("- 3. Exit                         -\n");
+    printf("- 4. Exit                         -\n");
     printf("-----------------------------------\n");
 }
 
@@ -120,7 +121,7 @@ void reverse(){
         printf("Address Number: %d \n", temp -> number);
         printf("Publishing Company: %s \n", temp -> company);
         printf("Renters Address: %s \n", temp -> address);
-        printf("Status: %s \n", temp -> status);
+        printf("Status: %s \n\n", temp -> status);
         temp = temp -> next;
     }
     printf("\n");
@@ -131,14 +132,14 @@ void dele(const char* book){
     Node* temp = head;
     Node* back = NULL;
     
-        if (temp != NULL &&  strcmp(temp->book, book) == 0){
+        if (temp != NULL && strcmp(temp->book, book) == 0){
             head = temp -> next;
             free(temp);
             printf("The book titled %s has been deleted on the list\n!!", book);
             return;
         }
         
-        while(temp!= NULL &&   strcmp(temp->book, book) != 0){
+        while(temp!= NULL && strcmp(temp->book, book) != 0){
             back = temp;
             temp = temp -> next;
         }
@@ -151,4 +152,3 @@ void dele(const char* book){
         printf("The book titled %s has been deleted on the list!!\n", book);
         return;
 }
-
