@@ -1,0 +1,47 @@
+#include <stdio.h>
+
+typedef struct students{
+    char name[100];
+    int arr[3];
+}students;
+
+int main(){
+    students s1;
+    int sum = 0;
+    float average;
+    printf("Enter the Name of the student: ");
+    scanf("%s", s1.name);
+
+    for(int i = 0; i < 3; i++){
+        printf("Enter the score for Quiz no.%d: ", i + 1);
+        scanf("%d", &s1.arr[i]);
+        sum += s1.arr[i];
+    }
+
+    average = (float)sum / 3;
+
+    printf("DETAILS!!\n");
+    printf("\nName: %s\n", s1.name);
+    for(int i = 0; i < 3; i++){
+        printf("Score for Quiz no.%d: %d\n", i + 1, s1.arr[i]);
+    }
+    printf("Total Average: %.4f", average);
+    
+    if(average <= 100 && average >= 90){
+        printf("\nLetter grade: A");
+    }
+    else if (average <= 89 && average >=80){
+         printf("\nLetter grade: B");
+    }
+    else if (average <= 79 && average >=70){
+         printf("\nLetter grade: c");
+    }
+    else if (average <= 69 && average >=60){
+         printf("\nLetter grade: D");
+    }
+    else{
+        printf("\nLetter grade: F");
+    }
+    
+
+}
