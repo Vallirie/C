@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct values{
+    int *ptr;
+    int n;
+}values;
+
+void menu();
+
+int main(){
+    values s1;
+    int choice;
+
+    do{
+    menu();
+    printf("Enter a choice: ");
+    scanf("%d", &choice);
+
+    
+    if(choice == 1){
+    printf("Enter the total Values: ");
+    scanf("%d", &s1.n);
+
+    s1.ptr = (int*)malloc(s1.n* sizeof(int));
+    for(int i = 0; i < s1.n; i++){
+        printf("Enter the values for %d: ", i + 1);
+        scanf("%d", &s1.ptr[i]);
+    }
+    printf("\n");
+    }
+
+    else if(choice == 2){
+    if(s1.ptr == NULL){
+        printf("There are no values\n");
+
+    }else{
+    printf("The entered values are: ");
+    for(int i = 0; i < s1.n; i++){
+        printf("%d ", s1.ptr[i]);
+    }
+    printf("\n");
+    }}
+
+    else if(choice == 3){
+    free(s1.ptr);
+    s1.ptr = NULL;
+    printf("Values deleted.\n");
+    }
+    else if (choice == 4){
+        return 0;
+    }
+
+    }while (1);
+}
+
+void menu(){
+    printf("---------------------------------------\n");
+    printf("- 1. add a value                      -\n");
+    printf("- 2. Display a value                  -\n");
+    printf("- 3. Delete                           -\n");
+    printf("- 4. Exit                             -\n");
+    printf("---------------------------------------\n");
+}
