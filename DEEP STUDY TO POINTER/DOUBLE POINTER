@@ -1,0 +1,16 @@
+#include <stdio.h>
+
+int main(){
+    int a = 5;
+    int *p = &a;
+    int **q = &p;
+    int ***r = &q;
+
+    printf("The value of a is %d %d %d %d", a, *p, **q, ***r);
+
+    //changing the value of a using a pointer
+    ***r = 50;
+    printf("\n\nThe value of a is %d %d %d %d", a, *p, **q, ***r);
+
+
+}
