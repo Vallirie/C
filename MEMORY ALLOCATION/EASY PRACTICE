@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct values{
+    int *ptr;
+    int n;
+}values;
+
+int main(){
+    values s1;
+    printf("Enter the total Values: ");
+    scanf("%d", &s1.n);
+
+    s1.ptr = (int*)malloc(s1.n* sizeof(int));
+    for(int i = 0; i < s1.n; i++){
+        printf("Enter the values for %d: ", i + 1);
+        scanf("%d", &s1.ptr[i]);
+    }
+
+    printf("The entered values are: ");
+    for(int i = 0; i < s1.n; i++){
+        printf("%d ", s1.ptr[i]);
+    }
+
+    free(s1.ptr);
+}
