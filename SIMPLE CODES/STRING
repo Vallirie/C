@@ -1,0 +1,55 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct name{
+	char name1[100];
+	char name2[100];
+	int sum = 0;
+	int sum1 = 0;
+}names;
+
+int main(){
+	names s1;
+
+	printf("Enter the full name for first student: ");
+	fgets(s1.name1, 100, stdin);
+	s1.name1[strlen(s1.name1)-1] = 0;
+
+	int arr1[3];
+	for(int i = 0; i < 3; i++){
+		printf("Grade no. %d: ", i + 1);
+		scanf("%d", &arr1[i]);
+		s1.sum+= arr1[i];
+	}
+	fgetc(stdin);
+	printf("Enter the full name for second student: ");
+	fgets(s1.name2, 100, stdin);
+	s1.name1[strlen(s1.name1)-1] = 0;
+	
+	int arr2[3];
+	for(int i = 0; i < 3; i++){
+		printf("Grade no. %d: ", i + 1);
+		scanf("%d", &arr2[i]);
+		s1.sum1+= arr2[i];
+	}
+
+	float total_sum = s1.sum + s1.sum1;
+	float total_average = total_sum/ 3;
+
+	printf("First student name: %s\n", s1.name1);
+	printf("Displaying the grades: \n");
+	for(int i = 0; i < 3; i++){
+		printf("Grade no.%d: %d\n",i+1, arr1[i]);
+	}
+
+	printf("Second student name: %s\n", s1.name2);
+	printf("Displaying the grades: \n");
+	for(int i = 0; i < 3; i++){
+		printf("Grade no.%d: %d\n",i+1, arr2[i]);
+	}
+	
+	printf("Total Average: %f", total_average);
+	return 0;
+}
