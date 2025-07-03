@@ -1,0 +1,79 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node{
+    int value;
+    struct Node* next;
+}Node;
+
+Node *head = NULL;
+void insert(int add);
+void display();
+void menu();
+
+int main(){
+    int add;
+    int choice;
+    
+    do{
+        menu();
+        printf("Enter a choice: ");
+        scanf("%d", &choice);
+        
+        switch (choice){
+            case 1:
+                printf("Add a number: ");
+                scanf("%d", &add);
+                insert (add);
+                printf("Your data has been added successfully!!\n\n");
+                break;
+            case 2:
+                display();
+                break;
+            case 3:
+            return 0;
+            break;
+            
+            default:
+            printf("Wrong input, do it again!!\n");
+        }
+
+    }while(1);
+    
+}
+
+void insert(int add){
+    Node*first = (Node*)malloc(sizeof(Node));
+    first -> value = add;
+    first -> next = head;
+    head = first;
+
+    Node *prev, *next, *current;
+    current = head;
+    prev = NULL;
+    
+    while(current != NULL){
+        next = current -> next;
+        current -> next = prev;
+        prev = current;
+        current = next;
+    }
+    head = prev;
+}
+
+void display(){
+    Node *temp = head;
+    while(temp!= NULL){
+        printf("The added value is %d\n", temp -> value);
+        temp = temp ->next;
+    }
+    printf("\n");
+}
+
+void menu(){
+    printf("------------------------\n");
+    printf("-1. Add a number       -\n");
+    printf("-2. Display a number   -\n");
+    printf("-3. Exit               -\n");
+    printf("------------------------\n");
+}
